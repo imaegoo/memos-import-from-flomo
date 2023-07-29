@@ -6,7 +6,11 @@ const idsFilePath = path.join(process.cwd(), "sendedIds.json");
 const ids = fs.readJSONSync(idsFilePath);
 
 for (const id of ids) {
-  deleteMemo(id).then(() => {
-    console.log("delete success", id);
-  });
+  deleteMemo(id)
+    .then(() => {
+      console.log("delete success", id);
+    })
+    .catch((error) => {
+      console.log("delete failed, skipping", id);
+    });
 }
